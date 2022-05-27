@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
 
+import '../shared/list_tiles.dart';
+
 class UserScreen extends StatefulWidget {
   const UserScreen({Key? key}) : super(key: key);
 
@@ -12,6 +14,13 @@ class UserScreen extends StatefulWidget {
 }
 
 class _UserScreenState extends State<UserScreen> {
+  final TextEditingController _addressController = TextEditingController();
+  @override
+  void dispose() {
+    _addressController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeState = Provider.of<DarkThemeProvider>(context);
@@ -55,7 +64,9 @@ class _UserScreenState extends State<UserScreen> {
               height: 20,
             ),
             ListTiles(
-              onPress: () {},
+              onPress: () async {
+                await _showAddressDialog();
+              },
               title: "Address",
               subtitle: "Sub here",
               icon: IconlyBold.location,
@@ -97,7 +108,9 @@ class _UserScreenState extends State<UserScreen> {
               value: themeState.darkTheme,
             ),
             ListTiles(
-              onPress: () {},
+              onPress: () async {
+                await _showSignOutDialog();
+              },
               title: "Logout",
               subtitle: "Sub here",
               icon: IconlyBold.logout,
@@ -107,35 +120,57 @@ class _UserScreenState extends State<UserScreen> {
       ),
     );
   }
-}
 
-class ListTiles extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  final IconData icon;
-  final Function onPress;
-  const ListTiles({
-    Key? key,
-    required this.onPress,
-    required this.title,
-    required this.subtitle,
-    required this.icon,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      onTap: () => onPress,
-      title: Text(
-        title,
-        style: TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
+  Future<void> _showSignOutDialog() async {
+    return await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Image.asset(
+              "images/warning-sign.png",
+              height: 50,
+              width: 50,
+            ),
+            Text("Sign Out?")
+          ],
         ),
+        content: Text("Do you want to sign out ?"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text("Cancel"),
+          ),
+          TextButton(
+            onPressed: () {},
+            style: TextButton.styleFrom(primary: Colors.red[900]),
+            child: Text("Ok"),
+          ),
+        ],
       ),
-      subtitle: Text("Subtitle Here"),
-      leading: Icon(icon),
-      trailing: Icon(IconlyLight.arrowRight2),
+    );
+  }
+
+  Future<void> _showAddressDialog() async {
+    return await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("Update"),
+        content: TextField(
+          controller: _addressController,
+          maxLines: 5,
+          decoration: InputDecoration(hintText: "Your Address"),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {},
+            child: Text("Save"),
+          ),
+        ],
+      ),
     );
   }
 }
