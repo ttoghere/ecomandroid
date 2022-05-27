@@ -3,9 +3,6 @@ import 'package:ecomandroid/services/utils.dart';
 import 'package:ecomandroid/shared/on_sale_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:provider/provider.dart';
-
-import '../providers/dark_theme_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -36,7 +33,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final Utils utils = Utils(context: context);
     Size size = utils.screenSize;
-    final themeState = utils.getTheme;
 
     return Scaffold(
       body: Column(
@@ -120,6 +116,25 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
+          SizedBox(
+            height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Our Products",
+                style: TextStyle(
+                  fontSize: 22,
+                  color: Colors.red[900],
+                ),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: Text("Browse All"),
+              ),
+            ],
+          )
         ],
       ),
     );
