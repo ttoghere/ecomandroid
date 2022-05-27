@@ -2,6 +2,7 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:ecomandroid/services/utils.dart';
 import 'package:ecomandroid/shared/on_sale_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/dark_theme_provider.dart';
@@ -59,7 +60,66 @@ class _HomeScreenState extends State<HomeScreen> {
               itemCount: offerImages.length,
             ),
           ),
-          OnSaleWidget(),
+          SizedBox(
+            height: 6,
+          ),
+          TextButton(
+            onPressed: () {},
+            child: Text(
+              "View All",
+              style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.blue,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+          SizedBox(
+            height: 6,
+          ),
+          Row(
+            children: [
+              RotatedBox(
+                quarterTurns: 3,
+                child: Row(
+                  children: [
+                    Text(
+                      "On Sale".toUpperCase(),
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 22,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Icon(
+                      IconlyLight.discount,
+                      color: Colors.red,
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                width: 8,
+              ),
+              Flexible(
+                child: SizedBox(
+                  height: size.height * 0.25,
+                  child: ListView.builder(
+                    itemCount: 10,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 2),
+                        child: OnSaleWidget(),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
