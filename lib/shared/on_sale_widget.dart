@@ -3,6 +3,8 @@ import 'package:ecomandroid/shared/price_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
+import 'heart_btn.dart';
+
 class OnSaleWidget extends StatefulWidget {
   const OnSaleWidget({Key? key}) : super(key: key);
 
@@ -22,68 +24,61 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
         onTap: () {},
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Image.network(
-                    networkImg,
-                    height: size.width * 0.22,
-                    fit: BoxFit.fill,
-                  ),
-                  Column(
-                    children: [
-                      Text(
-                        "26 Yrs",
-                        style: TextStyle(color: Colors.red[900], fontSize: 20),
-                      ),
-                      SizedBox(
-                        height: 6,
-                      ),
-                      Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () {},
-                            child: Icon(
-                              IconlyLight.bag2,
-                              color: Colors.red[900],
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {},
-                            child: Icon(
-                              IconlyLight.heart,
-                              color: Colors.red[900],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  )
-                ],
-              ),
-              PriceWidget(),
-              SizedBox(
-                height: 5,
-              ),
-              Text(
-                "Product Title",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 15,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Image.network(
+                  networkImg,
+                  height: size.width * 0.22,
+                  fit: BoxFit.fill,
                 ),
+                Column(
+                  children: [
+                    Text(
+                      "26 Yrs",
+                      style: TextStyle(color: Colors.red[900], fontSize: 20),
+                    ),
+                    SizedBox(
+                      height: 6,
+                    ),
+                    Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () {},
+                          child: Icon(
+                            IconlyLight.bag2,
+                            color: Colors.red[900],
+                          ),
+                        ),
+                        HeartBTN(),
+                      ],
+                    ),
+                  ],
+                )
+              ],
+            ),
+            PriceWidget(
+              salePrice: 2.99,
+              price: 5.9,
+              textPrice: "23",
+              isOnSale: true,
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Text(
+              "Product Title",
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w600,
+                fontSize: 15,
               ),
-              SizedBox(
-                height: 5,
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:ecomandroid/consts/theme_data.dart';
 import 'package:ecomandroid/providers/dark_theme_provider.dart';
 import 'package:ecomandroid/shared/bottom_bar.dart';
+import 'package:ecomandroid/views/on_sale_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -42,6 +43,9 @@ class _MyAppState extends State<MyApp> {
             theme: Styles.themeData(
                 isDarkTheme: value.darkTheme, context: context),
             home: BottomBarWidget(),
+            routes: {
+              OnSaleScreen.routeName: (context) => OnSaleScreen(),
+            },
           );
         },
       ),
