@@ -15,6 +15,12 @@ class CartWidget extends StatefulWidget {
 class _CartWidgetState extends State<CartWidget> {
   TextEditingController _quantityTextController = TextEditingController();
   @override
+  void initState() {
+    super.initState();
+    _quantityTextController.text = "1";
+  }
+
+  @override
   void dispose() {
     _quantityTextController.dispose();
     super.dispose();
@@ -136,6 +142,9 @@ class _CartWidgetState extends State<CartWidget> {
                         ),
                       ],
                     ),
+                  ),
+                  SizedBox(
+                    width: 5,
                   ),
                 ],
               ),
