@@ -3,6 +3,7 @@ import 'package:ecomandroid/services/global_methods.dart';
 import 'package:ecomandroid/services/utils.dart';
 import 'package:ecomandroid/shared/feed_items.dart';
 import 'package:ecomandroid/shared/on_sale_widget.dart';
+import 'package:ecomandroid/views/feeds_screen.dart';
 import 'package:ecomandroid/views/on_sale_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
@@ -139,7 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 TextButton(
                   onPressed: () {
-                    Navigator.of(context).pushNamed(OnSaleScreen.routeName);
+                    Navigator.of(context).pushNamed(FeedsScreen.routeName);
                   },
                   child: Text("Browse All"),
                 ),

@@ -9,6 +9,7 @@ class OnSaleScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool _isEmpty = false;
     Size size = Utils(context: context).screenSize;
     return Scaffold(
       appBar: AppBar(
@@ -24,15 +25,37 @@ class OnSaleScreen extends StatelessWidget {
           },
         ),
       ),
-      body: GridView.count(
-        crossAxisCount: 2,
-        padding: EdgeInsets.zero,
-        childAspectRatio: size.width / (size.height * 0.4),
-        children: List.generate(
-          16,
-          (index) => OnSaleWidget(),
-        ),
-      ),
+      body: _isEmpty
+          ? Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Image.asset(
+                      "images/box.png",
+                    ),
+                    Text(
+                      "No products on sale yet!, \nStay Tuned!!!",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 40,
+                        color: Colors.red[900],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          : GridView.count(
+              crossAxisCount: 2,
+              padding: EdgeInsets.zero,
+              childAspectRatio: size.width / (size.height * 0.4),
+              children: List.generate(
+                16,
+                (index) => OnSaleWidget(),
+              ),
+            ),
     );
   }
 }
