@@ -1,6 +1,7 @@
 import 'package:ecomandroid/services/utils.dart';
 import 'package:ecomandroid/shared/heart_btn.dart';
 import 'package:ecomandroid/shared/price_widget.dart';
+import 'package:ecomandroid/shared/product_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -33,7 +34,9 @@ class _FeedsItemsState extends State<FeedsItems> {
       child: Material(
         borderRadius: BorderRadius.circular(12),
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).pushNamed(ProductDetails.routeName);
+          },
           borderRadius: BorderRadius.circular(12),
           child: Column(
             children: [

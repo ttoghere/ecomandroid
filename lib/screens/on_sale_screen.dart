@@ -17,13 +17,7 @@ class OnSaleScreen extends StatelessWidget {
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.red[100],
-        leading: InkWell(
-          child: Icon(IconlyBold.arrowLeft2),
-          borderRadius: BorderRadius.circular(12),
-          onTap: () {
-            Navigator.of(context).pop();
-          },
-        ),
+        leading: BackWidget(),
       ),
       body: _isEmpty
           ? Center(
@@ -56,6 +50,23 @@ class OnSaleScreen extends StatelessWidget {
                 (index) => OnSaleWidget(),
               ),
             ),
+    );
+  }
+}
+
+class BackWidget extends StatelessWidget {
+  const BackWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      child: Icon(IconlyBold.arrowLeft2),
+      borderRadius: BorderRadius.circular(12),
+      onTap: () {
+        Navigator.of(context).pop();
+      },
     );
   }
 }

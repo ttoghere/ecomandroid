@@ -1,4 +1,7 @@
 import 'package:ecomandroid/providers/dark_theme_provider.dart';
+import 'package:ecomandroid/screens/viewed_recently/viewed_recently.dart';
+import 'package:ecomandroid/screens/wishlist/wishlist_screen.dart';
+import 'package:ecomandroid/services/global_methods.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
@@ -78,13 +81,19 @@ class _UserScreenState extends State<UserScreen> {
               icon: IconlyBold.wallet,
             ),
             ListTiles(
-              onPress: () {},
+              onPress: () {
+                Navigator.of(context).pushNamed(WishlistScreen.routeName);
+              },
               title: "Wishlist",
               subtitle: "Sub here",
               icon: IconlyBold.heart,
             ),
             ListTiles(
-              onPress: () {},
+              onPress: () {
+                GlobalMethods.navigateTo(
+                    context: context,
+                    routeName: ViewedRecentlyScreen.routeName);
+              },
               title: "Viewed",
               subtitle: "Sub here",
               icon: IconlyBold.location,
@@ -109,7 +118,12 @@ class _UserScreenState extends State<UserScreen> {
             ),
             ListTiles(
               onPress: () async {
-                await _showSignOutDialog();
+                await GlobalMethods.warningDialog(
+                  title: "Sign Out",
+                  subtitle: "Do you want to sign out ?",
+                  fct: () {},
+                  context: context,
+                );
               },
               title: "Logout",
               subtitle: "Sub here",

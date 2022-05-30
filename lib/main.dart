@@ -1,10 +1,16 @@
 import 'package:ecomandroid/consts/theme_data.dart';
 import 'package:ecomandroid/providers/dark_theme_provider.dart';
+import 'package:ecomandroid/screens/auth/forget_pass.dart';
+import 'package:ecomandroid/screens/auth/login.dart';
+import 'package:ecomandroid/screens/auth/register.dart';
+import 'package:ecomandroid/screens/viewed_recently/viewed_recently.dart';
+import 'package:ecomandroid/screens/wishlist/wishlist_screen.dart';
 import 'package:ecomandroid/shared/bottom_bar.dart';
-import 'package:ecomandroid/views/feeds_screen.dart';
-import 'package:ecomandroid/views/on_sale_screen.dart';
+import 'package:ecomandroid/shared/product_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'screens/feeds_screen.dart';
+import 'screens/on_sale_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,10 +49,18 @@ class _MyAppState extends State<MyApp> {
             title: 'Material App',
             theme: Styles.themeData(
                 isDarkTheme: value.darkTheme, context: context),
-            home: BottomBarWidget(),
+            initialRoute: LoginScreen.routeName,
             routes: {
               FeedsScreen.routeName: (context) => FeedsScreen(),
               OnSaleScreen.routeName: (context) => OnSaleScreen(),
+              ProductDetails.routeName: (context) => ProductDetails(),
+              WishlistScreen.routeName: (context) => WishlistScreen(),
+              ViewedRecentlyScreen.routeName: (context) =>
+                  ViewedRecentlyScreen(),
+              ForgetPasswordScreen.routeName: (context) =>
+                  ForgetPasswordScreen(),
+              RegisterScreen.routeName: (context) => RegisterScreen(),
+              LoginScreen.routeName: (context) => LoginScreen(),
             },
           );
         },
