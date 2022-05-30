@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import '../../services/utils.dart';
 import '../../shared/auth_button.dart';
 import '../../shared/text_widget.dart';
-import '../contss.dart';
-import '../on_sale_screen.dart';
+import '../../consts/contss.dart';
+import '../cart/on_sale_screen.dart';
 
 
 class ForgetPasswordScreen extends StatefulWidget {

@@ -1,10 +1,10 @@
-import 'package:ecomandroid/screens/empty_screen.dart';
+import 'package:ecomandroid/screens/cart/empty_screen.dart';
 import 'package:ecomandroid/screens/viewed_recently/viewed_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import '../../services/global_methods.dart';
 import '../../shared/text_widget.dart';
-import '../on_sale_screen.dart';
+import '../cart/on_sale_screen.dart';
 
 class ViewedRecentlyScreen extends StatefulWidget {
   static const routeName = '/ViewedRecentlyScreen';

@@ -1,4 +1,4 @@
-import 'package:ecomandroid/screens/empty_screen.dart';
+import 'package:ecomandroid/screens/cart/empty_screen.dart';
 import 'package:ecomandroid/services/global_methods.dart';
 import 'package:ecomandroid/services/utils.dart';
 import 'package:flutter/material.dart';

@@ -9,8 +9,8 @@ import 'package:ecomandroid/shared/bottom_bar.dart';
 import 'package:ecomandroid/shared/product_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'screens/feeds_screen.dart';
-import 'screens/on_sale_screen.dart';
+import 'screens/feeds/feeds_screen.dart';
+import 'screens/cart/on_sale_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,7 +49,7 @@ class _MyAppState extends State<MyApp> {
             title: 'Material App',
             theme: Styles.themeData(
                 isDarkTheme: value.darkTheme, context: context),
-            initialRoute: LoginScreen.routeName,
+            home: BottomBarWidget(),
             routes: {
               FeedsScreen.routeName: (context) => FeedsScreen(),
               OnSaleScreen.routeName: (context) => OnSaleScreen(),

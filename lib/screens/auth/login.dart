@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import '../../shared/auth_button.dart';
 import '../../shared/google_button.dart';
 import '../../shared/text_widget.dart';
-import '../contss.dart';
+import '../../consts/contss.dart';
 
 class LoginScreen extends StatefulWidget {
   static const routeName = '/LoginScreen';

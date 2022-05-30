@@ -1,12 +1,20 @@
+import 'package:ecomandroid/shared/text_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import 'package:ecomandroid/services/utils.dart';
 import 'package:ecomandroid/shared/heart_btn.dart';
 import 'package:ecomandroid/shared/price_widget.dart';
 import 'package:ecomandroid/shared/product_detail.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class FeedsItems extends StatefulWidget {
-  const FeedsItems({Key? key}) : super(key: key);
+  final String imageUrl;
+  final String title;
+  const FeedsItems({
+    Key? key,
+    required this.imageUrl,
+    required this.title,
+  }) : super(key: key);
 
   @override
   State<FeedsItems> createState() => _FeedsItemsState();
@@ -41,7 +49,7 @@ class _FeedsItemsState extends State<FeedsItems> {
           child: Column(
             children: [
               Image.network(
-                "https://scontent.fist2-3.fna.fbcdn.net/v/t39.30808-6/279418699_1464850347300483_3230164680752958616_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=Ew--Ep6CB5QAX9irJWt&_nc_ht=scontent.fist2-3.fna&oh=00_AT8tCUMsZPTUQ-2wcPutibse9mY-_3qFlM6wx500UwPU8w&oe=629788A8",
+                widget.imageUrl,
                 height: size.width * 0.21,
                 width: size.width * 0.21,
                 fit: BoxFit.fill,
@@ -51,19 +59,20 @@ class _FeedsItemsState extends State<FeedsItems> {
                   horizontal: 10,
                   vertical: 5,
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Title",
-                      style: TextStyle(
-                        fontSize: 22,
-                        color: Colors.red[900],
-                        fontWeight: FontWeight.bold,
+                child: FittedBox(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextWidget(
+                          text: widget.title,
+                          color: Colors.black,
+                          textSize: 18),
+                      SizedBox(
+                        width: 5,
                       ),
-                    ),
-                    HeartBTN(),
-                  ],
+                      HeartBTN(),
+                    ],
+                  ),
                 ),
               ),
               Row(

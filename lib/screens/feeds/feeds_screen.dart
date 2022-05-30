@@ -1,3 +1,4 @@
+import 'package:ecomandroid/consts/contss.dart';
 import 'package:ecomandroid/services/utils.dart';
 import 'package:ecomandroid/shared/feed_items.dart';
 import 'package:flutter/material.dart';
@@ -88,7 +89,13 @@ class _FeedsScreenState extends State<FeedsScreen> {
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               childAspectRatio: size.width / (size.height * 0.7),
-              children: List.generate(10, (index) => FeedsItems()),
+              children: List.generate(Constss.productsList.length, (index) {
+                var access = Constss.productsList;
+                return FeedsItems(
+                  imageUrl: access[index].imageUrl,
+                  title: access[index].title,
+                );
+              }),
             ),
           ],
         ),

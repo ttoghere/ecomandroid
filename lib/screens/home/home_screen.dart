@@ -1,12 +1,13 @@
 import 'package:card_swiper/card_swiper.dart';
+import 'package:ecomandroid/consts/contss.dart';
 import 'package:ecomandroid/services/global_methods.dart';
 import 'package:ecomandroid/services/utils.dart';
 import 'package:ecomandroid/shared/feed_items.dart';
 import 'package:ecomandroid/shared/on_sale_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'feeds_screen.dart';
-import 'on_sale_screen.dart';
+import '../feeds/feeds_screen.dart';
+import '../cart/on_sale_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -153,8 +154,16 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisCount: 2,
               childAspectRatio: size.width / (size.height * 0.7),
               children: List.generate(
-                4,
-                (index) => FeedsItems(),
+                Constss.productsList.length < 4
+                    ? Constss.productsList.length
+                    : 4,
+                (index) {
+                  var access = Constss.productsList[index];
+                  return FeedsItems(
+                    imageUrl: access.imageUrl,
+                    title: access.title,
+                  );
+                },
               ),
             ),
           ],

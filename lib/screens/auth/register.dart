@@ -6,7 +6,7 @@ import '../../services/global_methods.dart';
 import '../../services/utils.dart';
 import '../../shared/auth_button.dart';
 import '../../shared/text_widget.dart';
-import '../contss.dart';
+import '../../consts/contss.dart';
 import 'forget_pass.dart';
 import 'login.dart';
 

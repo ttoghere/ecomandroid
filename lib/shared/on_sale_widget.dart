@@ -1,5 +1,6 @@
 import 'package:ecomandroid/services/utils.dart';
 import 'package:ecomandroid/shared/price_widget.dart';
+import 'package:ecomandroid/shared/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
@@ -38,10 +39,8 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
                 ),
                 Column(
                   children: [
-                    Text(
-                      "26 Yrs",
-                      style: TextStyle(color: Colors.red[900], fontSize: 20),
-                    ),
+                    TextWidget(
+                        text: "26 YRS", color: Colors.black, textSize: 15),
                     SizedBox(
                       height: 6,
                     ),

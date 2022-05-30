@@ -1,4 +1,4 @@
-import 'package:ecomandroid/screens/feeds_screen.dart';
+import 'package:ecomandroid/screens/feeds/feeds_screen.dart';
 import 'package:ecomandroid/services/global_methods.dart';
 import 'package:ecomandroid/services/utils.dart';
 import 'package:ecomandroid/shared/text_widget.dart';

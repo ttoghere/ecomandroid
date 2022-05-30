@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../services/utils.dart';
 import '../../shared/text_widget.dart';
-import '../empty_screen.dart';
-import '../on_sale_screen.dart';
+import '../cart/empty_screen.dart';
+import '../cart/on_sale_screen.dart';
 import 'orders_widget.dart';
 
 class OrdersScreen extends StatefulWidget {
