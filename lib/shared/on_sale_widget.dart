@@ -3,7 +3,10 @@ import 'package:ecomandroid/shared/price_widget.dart';
 import 'package:ecomandroid/shared/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:provider/provider.dart';
 
+import '../models/products_model.dart';
+import '../providers/product_provider.dart';
 import 'heart_btn.dart';
 
 class OnSaleWidget extends StatefulWidget {
@@ -19,6 +22,7 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
     Utils utils = Utils(context: context);
     final theme = utils.getTheme;
     Size size = utils.screenSize;
+    final productProvider = Provider.of<ProductModel>(context);
     return Material(
       color: Colors.red[100],
       borderRadius: BorderRadius.circular(12),
@@ -33,14 +37,16 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Image.network(
-                  networkImg,
+                  productProvider.imageUrl,
                   height: size.width * 0.22,
                   fit: BoxFit.fill,
                 ),
                 Column(
                   children: [
                     TextWidget(
-                        text: "26 YRS", color: Colors.black, textSize: 15),
+                        text: productProvider.isPiece?"1Piece":"1KG",
+                        color: Colors.black,
+                        textSize: 15),
                     SizedBox(
                       height: 6,
                     ),
@@ -61,16 +67,16 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
               ],
             ),
             PriceWidget(
-              salePrice: 2.99,
-              price: 5.9,
+              salePrice: productProvider.salePrice,
+              price: productProvider.price,
               textPrice: "23",
-              isOnSale: true,
+              isOnSale: productProvider.isOnSale,
             ),
             SizedBox(
               height: 5,
             ),
             Text(
-              "Product Title",
+              productProvider.title,
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.w600,

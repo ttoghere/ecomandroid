@@ -2,6 +2,10 @@ import 'package:ecomandroid/services/utils.dart';
 import 'package:ecomandroid/shared/on_sale_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:provider/provider.dart';
+
+import '../../models/products_model.dart';
+import '../../providers/product_provider.dart';
 
 class OnSaleScreen extends StatelessWidget {
   static const routeName = "/onsalescreen";
@@ -9,7 +13,8 @@ class OnSaleScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool _isEmpty = false;
+    final productProvider = Provider.of<ProductsProvider>(context);
+    List<ProductModel> productsOnSale = productProvider.productList;
     Size size = Utils(context: context).screenSize;
     return Scaffold(
       appBar: AppBar(
@@ -19,7 +24,7 @@ class OnSaleScreen extends StatelessWidget {
         backgroundColor: Colors.red[100],
         leading: BackWidget(),
       ),
-      body: _isEmpty
+      body: productsOnSale.isEmpty
           ? Center(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -46,8 +51,11 @@ class OnSaleScreen extends StatelessWidget {
               padding: EdgeInsets.zero,
               childAspectRatio: size.width / (size.height * 0.4),
               children: List.generate(
-                16,
-                (index) => OnSaleWidget(),
+                productsOnSale.length,
+                (index) => ChangeNotifierProvider.value(
+                  child: OnSaleWidget(),
+                  value: productsOnSale[index],
+                ),
               ),
             ),
     );

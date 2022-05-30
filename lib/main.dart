@@ -1,5 +1,6 @@
 import 'package:ecomandroid/consts/theme_data.dart';
 import 'package:ecomandroid/providers/dark_theme_provider.dart';
+import 'package:ecomandroid/providers/product_provider.dart';
 import 'package:ecomandroid/screens/auth/forget_pass.dart';
 import 'package:ecomandroid/screens/auth/login.dart';
 import 'package:ecomandroid/screens/auth/register.dart';
@@ -40,6 +41,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (context)=>ProductsProvider()),
         ChangeNotifierProvider(create: (context) => darkThemeProvider),
       ],
       child: Consumer<DarkThemeProvider>(

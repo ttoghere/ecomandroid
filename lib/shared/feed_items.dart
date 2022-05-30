@@ -6,16 +6,12 @@ import 'package:ecomandroid/services/utils.dart';
 import 'package:ecomandroid/shared/heart_btn.dart';
 import 'package:ecomandroid/shared/price_widget.dart';
 import 'package:ecomandroid/shared/product_detail.dart';
+import 'package:provider/provider.dart';
+
+import '../models/products_model.dart';
+import '../providers/product_provider.dart';
 
 class FeedsItems extends StatefulWidget {
-  final String imageUrl;
-  final String title;
-  const FeedsItems({
-    Key? key,
-    required this.imageUrl,
-    required this.title,
-  }) : super(key: key);
-
   @override
   State<FeedsItems> createState() => _FeedsItemsState();
 }
@@ -37,6 +33,7 @@ class _FeedsItemsState extends State<FeedsItems> {
   @override
   Widget build(BuildContext context) {
     Size size = Utils(context: context).screenSize;
+    final productProvider = Provider.of<ProductModel>(context);
     return Padding(
       padding: EdgeInsets.all(10),
       child: Material(
@@ -49,7 +46,7 @@ class _FeedsItemsState extends State<FeedsItems> {
           child: Column(
             children: [
               Image.network(
-                widget.imageUrl,
+                productProvider.imageUrl,
                 height: size.width * 0.21,
                 width: size.width * 0.21,
                 fit: BoxFit.fill,
@@ -64,7 +61,7 @@ class _FeedsItemsState extends State<FeedsItems> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TextWidget(
-                          text: widget.title,
+                          text: productProvider.title,
                           color: Colors.black,
                           textSize: 18),
                       SizedBox(
@@ -75,54 +72,58 @@ class _FeedsItemsState extends State<FeedsItems> {
                   ),
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Flexible(
-                    flex: 4,
-                    child: PriceWidget(
-                      salePrice: 2.99,
-                      price: 5.9,
-                      textPrice: _quantityTextController.text,
-                      isOnSale: true,
+              Flexible(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                      flex: 3,
+                      child: PriceWidget(
+                        salePrice: productProvider.salePrice,
+                        price: productProvider.price,
+                        textPrice: _quantityTextController.text,
+                        isOnSale: productProvider.isOnSale,
+                      ),
                     ),
-                  ),
-                  Flexible(
-                    flex: 2,
-                    child: Row(
-                      children: [
-                        FittedBox(
-                          child: Text(
-                            "Kg",
-                            style: TextStyle(
-                              color: Colors.red[900],
-                              fontSize: 15,
+                    Flexible(
+                      child: Row(
+                        children: [
+                          Flexible(
+                            flex: 6,
+                            child: FittedBox(
+                              child: Text(
+                                productProvider.isPiece ? "Piece" : "Kg",
+                                style: TextStyle(
+                                  color: Colors.red[900],
+                                  fontSize: 15,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Flexible(
-                    child: TextFormField(
-                      controller: _quantityTextController,
-                      onChanged: (value) {
-                        setState(() {});
-                      },
-                      key: ValueKey("10"),
-                      style: TextStyle(
-                        color: Colors.blue[900],
-                        fontSize: 18,
+                        ],
                       ),
-                      keyboardType: TextInputType.number,
-                      maxLines: 1,
-                      enabled: true,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp("[0-9.]"))
-                      ],
                     ),
-                  ),
-                ],
+                    Flexible(
+                      child: TextFormField(
+                        controller: _quantityTextController,
+                        onChanged: (value) {
+                          setState(() {});
+                        },
+                        key: ValueKey("10"),
+                        style: TextStyle(
+                          color: Colors.blue[900],
+                          fontSize: 18,
+                        ),
+                        keyboardType: TextInputType.number,
+                        maxLines: 1,
+                        enabled: true,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(RegExp("[0-9.]"))
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
               TextButton(
                 style: TextButton.styleFrom(

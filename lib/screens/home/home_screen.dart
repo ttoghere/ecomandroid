@@ -6,6 +6,9 @@ import 'package:ecomandroid/shared/feed_items.dart';
 import 'package:ecomandroid/shared/on_sale_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:provider/provider.dart';
+import '../../models/products_model.dart';
+import '../../providers/product_provider.dart';
 import '../feeds/feeds_screen.dart';
 import '../cart/on_sale_screen.dart';
 
@@ -36,6 +39,9 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
   @override
   Widget build(BuildContext context) {
+    final productProvider = Provider.of<ProductsProvider>(context);
+    List<ProductModel> allProducts = productProvider.productList;
+    List<ProductModel> productOnSale = productProvider.getOnSaleProducts;
     final Utils utils = Utils(context: context);
     Size size = utils.screenSize;
     return Scaffold(
@@ -113,12 +119,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: SizedBox(
                     height: size.height * 0.25,
                     child: ListView.builder(
-                      itemCount: 10,
+                      itemCount:
+                          productOnSale.length < 10 ? productOnSale.length : 10,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 2),
-                          child: OnSaleWidget(),
+                          child: ChangeNotifierProvider.value(
+                            child: OnSaleWidget(),
+                            value: productOnSale[index],
+                          ),
                         );
                       },
                     ),
@@ -154,14 +164,12 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisCount: 2,
               childAspectRatio: size.width / (size.height * 0.7),
               children: List.generate(
-                Constss.productsList.length < 4
-                    ? Constss.productsList.length
-                    : 4,
+                allProducts.length < 4 ? allProducts.length : 4,
                 (index) {
-                  var access = Constss.productsList[index];
-                  return FeedsItems(
-                    imageUrl: access.imageUrl,
-                    title: access.title,
+                  var access = allProducts[index];
+                  return ChangeNotifierProvider.value(
+                    value: allProducts[index],
+                    child: FeedsItems(),
                   );
                 },
               ),

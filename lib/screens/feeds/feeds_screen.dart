@@ -1,8 +1,11 @@
 import 'package:ecomandroid/consts/contss.dart';
+import 'package:ecomandroid/models/products_model.dart';
+import 'package:ecomandroid/providers/product_provider.dart';
 import 'package:ecomandroid/services/utils.dart';
 import 'package:ecomandroid/shared/feed_items.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:provider/provider.dart';
 
 class FeedsScreen extends StatefulWidget {
   static const routeName = "/feedsscreen";
@@ -25,6 +28,8 @@ class _FeedsScreenState extends State<FeedsScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = Utils(context: context).screenSize;
+    final productProvider = Provider.of<ProductsProvider>(context);
+    List<ProductModel> allProducts = productProvider.productList;
     return Scaffold(
       appBar: AppBar(
         title: Text("Products On Sale"),
@@ -89,11 +94,13 @@ class _FeedsScreenState extends State<FeedsScreen> {
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               childAspectRatio: size.width / (size.height * 0.7),
-              children: List.generate(Constss.productsList.length, (index) {
-                var access = Constss.productsList;
-                return FeedsItems(
-                  imageUrl: access[index].imageUrl,
-                  title: access[index].title,
+              children: List.generate(allProducts.length, (index) {
+                var access = allProducts[index];
+                return ChangeNotifierProvider.value(
+                  value: access,
+                  child: FeedsItems(
+                   
+                  ),
                 );
               }),
             ),
