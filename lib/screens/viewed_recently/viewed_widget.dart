@@ -1,5 +1,5 @@
 import 'package:ecomandroid/services/global_methods.dart';
-import 'package:ecomandroid/shared/product_detail.dart';
+import 'package:ecomandroid/screens/detail/product_detail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../services/utils.dart';

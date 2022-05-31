@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:ecomandroid/services/utils.dart';
 import 'package:ecomandroid/shared/heart_btn.dart';
 import 'package:ecomandroid/shared/price_widget.dart';
-import 'package:ecomandroid/shared/product_detail.dart';
+import 'package:ecomandroid/screens/detail/product_detail.dart';
 import 'package:provider/provider.dart';
 
 import '../models/products_model.dart';

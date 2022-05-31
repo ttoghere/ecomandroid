@@ -7,7 +7,8 @@ class GlobalMethods {
       {required BuildContext context, required String routeName}) {
     Navigator.of(context).pushNamed(routeName);
   }
-    static Future<void> warningDialog({
+
+  static Future<void> warningDialog({
     required String title,
     required String subtitle,
     required Function fct,
@@ -46,6 +47,9 @@ class GlobalMethods {
               TextButton(
                 onPressed: () {
                   fct();
+                  if (Navigator.canPop(context)) {
+                    Navigator.pop(context);
+                  }
                 },
                 child: TextWidget(
                   color: Colors.red,

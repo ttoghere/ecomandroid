@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import '../../models/products_model.dart';
 import '../../providers/product_provider.dart';
 import '../../shared/heart_btn.dart';
-import '../../shared/product_detail.dart';
+import '../detail/product_detail.dart';
 
 class OnSaleWidget extends StatefulWidget {
   const OnSaleWidget({Key? key}) : super(key: key);

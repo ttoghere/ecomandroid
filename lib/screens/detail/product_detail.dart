@@ -1,13 +1,14 @@
+import 'package:ecomandroid/providers/cart_provider.dart';
 import 'package:ecomandroid/providers/product_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
-import '../services/utils.dart';
+import '../../services/utils.dart';
 
-import 'heart_btn.dart';
-import 'text_widget.dart';
+import '../../shared/heart_btn.dart';
+import '../../shared/text_widget.dart';
 
 class ProductDetails extends StatefulWidget {
   static const routeName = '/ProductDetails';
@@ -31,6 +32,7 @@ class _ProductDetailsState extends State<ProductDetails> {
   @override
   Widget build(BuildContext context) {
     Size size = Utils(context: context).screenSize;
+    final cartProvider = Provider.of<CartProvider>(context);
     final productId = ModalRoute.of(context)!.settings.arguments as String;
     final productProvider = Provider.of<ProductsProvider>(context);
     final getCurrentProduct =
@@ -263,12 +265,18 @@ class _ProductDetailsState extends State<ProductDetails> {
                           color: Colors.green,
                           borderRadius: BorderRadius.circular(10),
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              cartProvider.addProductsToCart(
+                                productId: getCurrentProduct.id,
+                                quantity:
+                                    int.parse(_quantityTextController.text),
+                              );
+                            },
                             borderRadius: BorderRadius.circular(10),
                             child: Padding(
                                 padding: const EdgeInsets.all(12.0),
                                 child: TextWidget(
-                                    text: 'In cart',
+                                    text: 'Add to cart',
                                     color: Colors.white,
                                     textSize: 18)),
                           ),

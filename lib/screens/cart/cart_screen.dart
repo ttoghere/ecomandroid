@@ -1,7 +1,9 @@
+import 'package:ecomandroid/providers/cart_provider.dart';
 import 'package:ecomandroid/screens/cart/empty_screen.dart';
 import 'package:ecomandroid/services/global_methods.dart';
 import 'package:ecomandroid/services/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'cart_widget.dart';
 
@@ -15,9 +17,11 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
-    bool _isEmpty = true;
     Size size = Utils(context: context).screenSize;
-    return _isEmpty
+    final cartProvider = Provider.of<CartProvider>(context);
+    final cartItemsList =
+        cartProvider.cartItems.values.toList().reversed.toList();
+    return cartItemsList.isEmpty
         ? EmptyScreen(
             title: "title",
             subtitle: "subtitle",
@@ -27,7 +31,7 @@ class _CartScreenState extends State<CartScreen> {
             appBar: AppBar(
               centerTitle: false,
               title: Text(
-                "Cart (2) ",
+                "Cart (${cartItemsList.length}) ",
                 style: TextStyle(fontSize: 22, color: Colors.black),
               ),
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -38,7 +42,9 @@ class _CartScreenState extends State<CartScreen> {
                     GlobalMethods.warningDialog(
                       title: "Empty your cart?",
                       subtitle: "Are you sure?",
-                      fct: () {},
+                      fct: () {
+                        cartProvider.clearCart();
+                      },
                       context: context,
                     );
                   },
@@ -57,9 +63,13 @@ class _CartScreenState extends State<CartScreen> {
                   Expanded(
                     child: ListView.builder(
                       itemBuilder: (context, index) {
-                        return CartWidget();
+                        return ChangeNotifierProvider.value(
+                            value: cartItemsList[index],
+                            child: CartWidget(
+                              q: cartItemsList[index].quantity,
+                            ));
                       },
-                      itemCount: 10,
+                      itemCount: cartItemsList.length,
                     ),
                   ),
                 ],

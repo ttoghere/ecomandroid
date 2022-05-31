@@ -10,7 +10,7 @@ import 'package:ecomandroid/screens/category/category_screen.dart';
 import 'package:ecomandroid/screens/viewed_recently/viewed_recently.dart';
 import 'package:ecomandroid/screens/wishlist/wishlist_screen.dart';
 import 'package:ecomandroid/shared/bottom_bar.dart';
-import 'package:ecomandroid/shared/product_detail.dart';
+import 'package:ecomandroid/screens/detail/product_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'screens/feeds/feeds_screen.dart';

@@ -4,7 +4,7 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 
 import '../../services/utils.dart';
 import '../../shared/heart_btn.dart';
-import '../../shared/product_detail.dart';
+import '../detail/product_detail.dart';
 import '../../shared/text_widget.dart';
 
 class WishlistWidget extends StatelessWidget {
