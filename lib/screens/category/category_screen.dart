@@ -3,7 +3,7 @@ import 'package:ecomandroid/models/products_model.dart';
 import 'package:ecomandroid/providers/product_provider.dart';
 import 'package:ecomandroid/services/utils.dart';
 import 'package:ecomandroid/shared/empty_products.dart';
-import 'package:ecomandroid/shared/feed_items.dart';
+import 'package:ecomandroid/screens/feeds/feed_items.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';

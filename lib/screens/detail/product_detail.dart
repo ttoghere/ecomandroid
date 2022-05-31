@@ -41,6 +41,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         ? getCurrentProduct.salePrice
         : getCurrentProduct.price;
     double totalPrice = usedPrice * int.parse(_quantityTextController.text);
+    bool? _isInCart = cartProvider.cartItems.containsKey(getCurrentProduct.id);
     return Scaffold(
       appBar: AppBar(
           leading: InkWell(
@@ -265,18 +266,20 @@ class _ProductDetailsState extends State<ProductDetails> {
                           color: Colors.green,
                           borderRadius: BorderRadius.circular(10),
                           child: InkWell(
-                            onTap: () {
-                              cartProvider.addProductsToCart(
-                                productId: getCurrentProduct.id,
-                                quantity:
-                                    int.parse(_quantityTextController.text),
-                              );
-                            },
+                            onTap: _isInCart
+                                ? null
+                                : () {
+                                    cartProvider.addProductsToCart(
+                                      productId: getCurrentProduct.id,
+                                      quantity: int.parse(
+                                          _quantityTextController.text),
+                                    );
+                                  },
                             borderRadius: BorderRadius.circular(10),
                             child: Padding(
                                 padding: const EdgeInsets.all(12.0),
                                 child: TextWidget(
-                                    text: 'Add to cart',
+                                    text: _isInCart ? "In Cart" : "Add to cart",
                                     color: Colors.white,
                                     textSize: 18)),
                           ),

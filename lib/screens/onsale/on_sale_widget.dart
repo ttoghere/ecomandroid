@@ -26,6 +26,7 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
     Size size = utils.screenSize;
     final cartProvider = Provider.of<CartProvider>(context);
     final productProvider = Provider.of<ProductModel>(context);
+    bool? _isInCart = cartProvider.cartItems.containsKey(productProvider.id);
     return Material(
       color: Colors.red[100],
       borderRadius: BorderRadius.circular(12),
@@ -67,7 +68,7 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
                           },
                           child: Icon(
                             IconlyLight.bag2,
-                            color: Colors.red[900],
+                            color: _isInCart ? Colors.green : Colors.red[900],
                           ),
                         ),
                         HeartBTN(),

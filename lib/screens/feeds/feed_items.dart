@@ -9,8 +9,8 @@ import 'package:ecomandroid/shared/price_widget.dart';
 import 'package:ecomandroid/screens/detail/product_detail.dart';
 import 'package:provider/provider.dart';
 
-import '../models/products_model.dart';
-import '../providers/product_provider.dart';
+import '../../models/products_model.dart';
+import '../../providers/product_provider.dart';
 
 class FeedsItems extends StatefulWidget {
   @override
@@ -36,6 +36,7 @@ class _FeedsItemsState extends State<FeedsItems> {
     Size size = Utils(context: context).screenSize;
     final productProvider = Provider.of<ProductModel>(context);
     final cartProvider = Provider.of<CartProvider>(context);
+    bool? _isInCart = cartProvider.cartItems.containsKey(productProvider.id);
     return Padding(
       padding: EdgeInsets.all(10),
       child: Material(
@@ -137,14 +138,16 @@ class _FeedsItemsState extends State<FeedsItems> {
                         bottomRight: Radius.circular(10)),
                   ),
                 ),
-                onPressed: () {
-                  cartProvider.addProductsToCart(
-                    productId: productProvider.id,
-                    quantity: int.parse(_quantityTextController.text),
-                  );
-                },
+                onPressed: _isInCart
+                    ? null
+                    : () {
+                        cartProvider.addProductsToCart(
+                          productId: productProvider.id,
+                          quantity: int.parse(_quantityTextController.text),
+                        );
+                      },
                 child: Text(
-                  "Add to cart",
+                  _isInCart ? "In Cart" : "Add to cart",
                   maxLines: 1,
                   style: TextStyle(fontSize: 20),
                 ),

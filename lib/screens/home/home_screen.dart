@@ -2,7 +2,7 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:ecomandroid/consts/contss.dart';
 import 'package:ecomandroid/services/global_methods.dart';
 import 'package:ecomandroid/services/utils.dart';
-import 'package:ecomandroid/shared/feed_items.dart';
+import 'package:ecomandroid/screens/feeds/feed_items.dart';
 import 'package:ecomandroid/screens/onsale/on_sale_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
