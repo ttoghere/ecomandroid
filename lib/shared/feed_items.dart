@@ -1,3 +1,4 @@
+import 'package:ecomandroid/providers/cart_provider.dart';
 import 'package:ecomandroid/shared/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -34,13 +35,15 @@ class _FeedsItemsState extends State<FeedsItems> {
   Widget build(BuildContext context) {
     Size size = Utils(context: context).screenSize;
     final productProvider = Provider.of<ProductModel>(context);
+    final cartProvider = Provider.of<CartProvider>(context);
     return Padding(
       padding: EdgeInsets.all(10),
       child: Material(
         borderRadius: BorderRadius.circular(12),
         child: InkWell(
           onTap: () {
-            Navigator.of(context).pushNamed(ProductDetails.routeName);
+            Navigator.of(context).pushNamed(ProductDetails.routeName,
+                arguments: productProvider.id);
           },
           borderRadius: BorderRadius.circular(12),
           child: Column(
@@ -134,7 +137,12 @@ class _FeedsItemsState extends State<FeedsItems> {
                         bottomRight: Radius.circular(10)),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  cartProvider.addProductsToCart(
+                    productId: productProvider.id,
+                    quantity: int.parse(_quantityTextController.text),
+                  );
+                },
                 child: Text(
                   "Add to cart",
                   maxLines: 1,

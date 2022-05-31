@@ -1,3 +1,4 @@
+import 'package:ecomandroid/screens/category/category_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +19,10 @@ class CategoriesWidget extends StatelessWidget {
     double _screenWidth = MediaQuery.of(context).size.width;
     final themeState = Provider.of<DarkThemeProvider>(context);
     return InkWell(
-      onTap: () => print("Category Selected"),
+      onTap: () {
+        Navigator.of(context)
+            .pushNamed(CategoryScreen.routeName, arguments: catText);
+      },
       child: Container(
         decoration: BoxDecoration(
           color: Colors.red.withOpacity(0.1),

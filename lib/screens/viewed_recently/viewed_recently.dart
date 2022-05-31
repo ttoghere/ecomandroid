@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import '../../services/global_methods.dart';
 import '../../shared/text_widget.dart';
-import '../cart/on_sale_screen.dart';
+import '../onsale/on_sale_screen.dart';
 
 class ViewedRecentlyScreen extends StatefulWidget {
   static const routeName = '/ViewedRecentlyScreen';

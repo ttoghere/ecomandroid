@@ -1,9 +1,12 @@
 import 'package:ecomandroid/consts/theme_data.dart';
+import 'package:ecomandroid/providers/cart_provider.dart';
 import 'package:ecomandroid/providers/dark_theme_provider.dart';
 import 'package:ecomandroid/providers/product_provider.dart';
 import 'package:ecomandroid/screens/auth/forget_pass.dart';
 import 'package:ecomandroid/screens/auth/login.dart';
 import 'package:ecomandroid/screens/auth/register.dart';
+import 'package:ecomandroid/screens/category/categories_screen.dart';
+import 'package:ecomandroid/screens/category/category_screen.dart';
 import 'package:ecomandroid/screens/viewed_recently/viewed_recently.dart';
 import 'package:ecomandroid/screens/wishlist/wishlist_screen.dart';
 import 'package:ecomandroid/shared/bottom_bar.dart';
@@ -11,7 +14,7 @@ import 'package:ecomandroid/shared/product_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'screens/feeds/feeds_screen.dart';
-import 'screens/cart/on_sale_screen.dart';
+import 'screens/onsale/on_sale_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,8 +44,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context)=>ProductsProvider()),
+        ChangeNotifierProvider(create: (context) => ProductsProvider()),
         ChangeNotifierProvider(create: (context) => darkThemeProvider),
+        ChangeNotifierProvider(create: (context) => CartProvider()),
       ],
       child: Consumer<DarkThemeProvider>(
         builder: (context, value, child) {
@@ -63,6 +67,7 @@ class _MyAppState extends State<MyApp> {
                   ForgetPasswordScreen(),
               RegisterScreen.routeName: (context) => RegisterScreen(),
               LoginScreen.routeName: (context) => LoginScreen(),
+              CategoryScreen.routeName: (context) => CategoryScreen(),
             },
           );
         },

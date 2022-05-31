@@ -1,7 +1,9 @@
+import 'package:ecomandroid/providers/product_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:provider/provider.dart';
 import '../services/utils.dart';
 
 import 'heart_btn.dart';
@@ -29,7 +31,14 @@ class _ProductDetailsState extends State<ProductDetails> {
   @override
   Widget build(BuildContext context) {
     Size size = Utils(context: context).screenSize;
-
+    final productId = ModalRoute.of(context)!.settings.arguments as String;
+    final productProvider = Provider.of<ProductsProvider>(context);
+    final getCurrentProduct =
+        productProvider.findProdById(productId: productId);
+    double usedPrice = getCurrentProduct.isOnSale
+        ? getCurrentProduct.salePrice
+        : getCurrentProduct.price;
+    double totalPrice = usedPrice * int.parse(_quantityTextController.text);
     return Scaffold(
       appBar: AppBar(
           leading: InkWell(
@@ -48,7 +57,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         Flexible(
           flex: 2,
           child: Image.network(
-            "https://scontent.fist2-3.fna.fbcdn.net/v/t39.30808-6/279418699_1464850347300483_3230164680752958616_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=Ew--Ep6CB5QAX-Lo8yE&_nc_ht=scontent.fist2-3.fna&oh=00_AT9oWuu-c-HHVRKtbiNQ_vftpzObozN6SaHYfWl5pVW6hA&oe=629982E8",
+            getCurrentProduct.imageUrl,
             fit: BoxFit.scaleDown,
             width: size.width,
             // height: screenHeight * .4,
@@ -74,7 +83,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                     children: [
                       Flexible(
                         child: TextWidget(
-                          text: "Başlık",
+                          text: getCurrentProduct.title,
                           color: Colors.black,
                           textSize: 25,
                           isTitle: true,
@@ -91,7 +100,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       TextWidget(
-                        text: '\$2.22',
+                        text: getCurrentProduct.salePrice.toString(),
                         color: Colors.green,
                         textSize: 22,
                         isTitle: true,
@@ -108,7 +117,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       Visibility(
                         visible: true,
                         child: Text(
-                          '\$2.22',
+                          "\$${getCurrentProduct.price.toStringAsFixed(2)}",
                           style: TextStyle(
                               fontSize: 15,
                               color: Colors.blue,
@@ -229,13 +238,13 @@ class _ProductDetailsState extends State<ProductDetails> {
                               child: Row(
                                 children: [
                                   TextWidget(
-                                    text: '\$2.22',
+                                    text: '\$${totalPrice.toStringAsFixed(2)}/',
                                     color: Colors.black,
                                     textSize: 20,
                                     isTitle: true,
                                   ),
                                   TextWidget(
-                                    text: '2Kg',
+                                    text: "${_quantityTextController.text}Kg",
                                     color: Colors.yellow,
                                     textSize: 16,
                                     isTitle: false,

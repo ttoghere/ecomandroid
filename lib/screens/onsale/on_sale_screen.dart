@@ -1,5 +1,6 @@
 import 'package:ecomandroid/services/utils.dart';
-import 'package:ecomandroid/shared/on_sale_widget.dart';
+import 'package:ecomandroid/shared/empty_products.dart';
+import 'package:ecomandroid/screens/onsale/on_sale_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
@@ -25,27 +26,7 @@ class OnSaleScreen extends StatelessWidget {
         leading: BackWidget(),
       ),
       body: productsOnSale.isEmpty
-          ? Center(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    Image.asset(
-                      "images/box.png",
-                    ),
-                    Text(
-                      "No products on sale yet!, \nStay Tuned!!!",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 40,
-                        color: Colors.red[900],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            )
+          ? EmptyProdWidget(text: "No product on sale yet!\nStay Tuned!")
           : GridView.count(
               crossAxisCount: 2,
               padding: EdgeInsets.zero,

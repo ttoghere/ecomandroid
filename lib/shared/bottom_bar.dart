@@ -3,7 +3,7 @@ import 'package:ecomandroid/shared/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import '../screens/cart/cart_screen.dart';
-import '../screens/categories/categories_screen.dart';
+import '../screens/category/categories_screen.dart';
 import '../screens/home/home_screen.dart';
 import '../screens/users/user_screen.dart';
 

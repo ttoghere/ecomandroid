@@ -11,6 +11,19 @@ class ProductsProvider with ChangeNotifier {
     return _productsList.where((element) => element.isOnSale).toList();
   }
 
+  ProductModel findProdById({required String productId}) {
+    return _productsList.firstWhere((element) => element.id == productId);
+  }
+
+  List<ProductModel> findBgCategory({required String categoryName}) {
+    List<ProductModel> _categoryList = _productsList
+        .where((element) => element.productCategoryName
+            .toLowerCase()
+            .contains(categoryName.toLowerCase()))
+        .toList();
+    return _categoryList;
+  }
+
   static final List<ProductModel> _productsList = [
     ProductModel(
       id: 'Apricot',

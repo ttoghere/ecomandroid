@@ -3,14 +3,14 @@ import 'package:ecomandroid/consts/contss.dart';
 import 'package:ecomandroid/services/global_methods.dart';
 import 'package:ecomandroid/services/utils.dart';
 import 'package:ecomandroid/shared/feed_items.dart';
-import 'package:ecomandroid/shared/on_sale_widget.dart';
+import 'package:ecomandroid/screens/onsale/on_sale_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
 import '../../models/products_model.dart';
 import '../../providers/product_provider.dart';
 import '../feeds/feeds_screen.dart';
-import '../cart/on_sale_screen.dart';
+import '../onsale/on_sale_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({

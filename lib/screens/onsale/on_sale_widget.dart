@@ -1,3 +1,4 @@
+import 'package:ecomandroid/providers/cart_provider.dart';
 import 'package:ecomandroid/services/utils.dart';
 import 'package:ecomandroid/shared/price_widget.dart';
 import 'package:ecomandroid/shared/text_widget.dart';
@@ -5,9 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
 
-import '../models/products_model.dart';
-import '../providers/product_provider.dart';
-import 'heart_btn.dart';
+import '../../models/products_model.dart';
+import '../../providers/product_provider.dart';
+import '../../shared/heart_btn.dart';
+import '../../shared/product_detail.dart';
 
 class OnSaleWidget extends StatefulWidget {
   const OnSaleWidget({Key? key}) : super(key: key);
@@ -22,13 +24,17 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
     Utils utils = Utils(context: context);
     final theme = utils.getTheme;
     Size size = utils.screenSize;
+    final cartProvider = Provider.of<CartProvider>(context);
     final productProvider = Provider.of<ProductModel>(context);
     return Material(
       color: Colors.red[100],
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
-        onTap: () {},
+        onTap: () {
+          Navigator.of(context).pushNamed(ProductDetails.routeName,
+              arguments: productProvider.id);
+        },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -44,7 +50,7 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
                 Column(
                   children: [
                     TextWidget(
-                        text: productProvider.isPiece?"1Piece":"1KG",
+                        text: productProvider.isPiece ? "1Piece" : "1KG",
                         color: Colors.black,
                         textSize: 15),
                     SizedBox(
@@ -53,7 +59,12 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
                     Row(
                       children: [
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            cartProvider.addProductsToCart(
+                              productId: productProvider.id,
+                              quantity: 1,
+                            );
+                          },
                           child: Icon(
                             IconlyLight.bag2,
                             color: Colors.red[900],

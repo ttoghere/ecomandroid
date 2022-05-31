@@ -5,7 +5,7 @@ import '../../services/utils.dart';
 import '../../shared/auth_button.dart';
 import '../../shared/text_widget.dart';
 import '../../consts/contss.dart';
-import '../cart/on_sale_screen.dart';
+import '../onsale/on_sale_screen.dart';
 
 
 class ForgetPasswordScreen extends StatefulWidget {

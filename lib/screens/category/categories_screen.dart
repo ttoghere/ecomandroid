@@ -1,5 +1,5 @@
 import 'package:ecomandroid/services/utils.dart';
-import 'package:ecomandroid/shared/categories_widget.dart';
+import 'package:ecomandroid/screens/category/categories_widget.dart';
 import 'package:flutter/material.dart';
 
 class CategoriesScreen extends StatefulWidget {
