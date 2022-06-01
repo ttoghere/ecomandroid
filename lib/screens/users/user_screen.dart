@@ -121,7 +121,9 @@ class _UserScreenState extends State<UserScreen> {
                 await GlobalMethods.warningDialog(
                   title: "Sign Out",
                   subtitle: "Do you want to sign out ?",
-                  fct: () {},
+                  fct: () {
+                    _showSignOutDialog();
+                  },
                   context: context,
                 );
               },

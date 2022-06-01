@@ -7,7 +7,7 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/products_model.dart';
-import '../../providers/product_provider.dart';
+import '../../providers/wishlist_provider.dart';
 import '../../shared/heart_btn.dart';
 import '../detail/product_detail.dart';
 
@@ -22,11 +22,13 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
   @override
   Widget build(BuildContext context) {
     Utils utils = Utils(context: context);
-    final theme = utils.getTheme;
     Size size = utils.screenSize;
     final cartProvider = Provider.of<CartProvider>(context);
     final productProvider = Provider.of<ProductModel>(context);
     bool? _isInCart = cartProvider.cartItems.containsKey(productProvider.id);
+    final wishlistProvider = Provider.of<WishlistProvider>(context);
+    bool? _isWishlist =
+        wishlistProvider.wishListItems.containsKey(productProvider.id);
     return Material(
       color: Colors.red[100],
       borderRadius: BorderRadius.circular(12),
@@ -71,7 +73,10 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
                             color: _isInCart ? Colors.green : Colors.red[900],
                           ),
                         ),
-                        HeartBTN(),
+                        HeartBTN(
+                          productId: productProvider.id,
+                          isInWishlist: _isWishlist,
+                        ),
                       ],
                     ),
                   ],
@@ -101,6 +106,3 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
     );
   }
 }
-
-const networkImg =
-    "https://scontent.fist2-3.fna.fbcdn.net/v/t39.30808-6/279418699_1464850347300483_3230164680752958616_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=y5W1xPcd_EAAX-S8Pl7&_nc_ht=scontent.fist2-3.fna&oh=00_AT-ahBMSog6IKLiovGbfMnnbY7QY0e1zQJC1dpTojPUGCA&oe=62958E68";

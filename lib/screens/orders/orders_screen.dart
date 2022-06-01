@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../services/utils.dart';
 import '../../shared/text_widget.dart';
 import '../cart/empty_screen.dart';
 import '../onsale/on_sale_screen.dart';

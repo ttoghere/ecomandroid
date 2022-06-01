@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
+import '../../providers/wishlist_provider.dart';
 import '../../services/utils.dart';
 
 import '../../shared/heart_btn.dart';
@@ -42,6 +43,9 @@ class _ProductDetailsState extends State<ProductDetails> {
         : getCurrentProduct.price;
     double totalPrice = usedPrice * int.parse(_quantityTextController.text);
     bool? _isInCart = cartProvider.cartItems.containsKey(getCurrentProduct.id);
+    final wishlistProvider = Provider.of<WishlistProvider>(context);
+    bool? _isWishlist =
+        wishlistProvider.wishListItems.containsKey(getCurrentProduct.id);
     return Scaffold(
       appBar: AppBar(
           leading: InkWell(
@@ -92,7 +96,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                           isTitle: true,
                         ),
                       ),
-                      HeartBTN()
+                      HeartBTN(
+                        productId: getCurrentProduct.id,
+                        isInWishlist: _isWishlist,
+                      ),
                     ],
                   ),
                 ),

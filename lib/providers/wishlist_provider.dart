@@ -1,4 +1,3 @@
-import 'package:ecomandroid/models/cart_model.dart';
 import 'package:ecomandroid/models/wishlist_model.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +7,7 @@ class WishlistProvider with ChangeNotifier {
     return {..._wishListItems};
   }
 
-  void addProductToWishList({required String productId}) {
+  void addRemoveProductToWishlist({required String productId}) {
     if (_wishListItems.containsKey(productId)) {
       removeOneItem(productId: productId);
     } else {
@@ -20,6 +19,7 @@ class WishlistProvider with ChangeNotifier {
         ),
       );
     }
+    notifyListeners();
   }
 
   void removeOneItem({required String productId}) {

@@ -1,4 +1,3 @@
-import 'package:ecomandroid/services/utils.dart';
 import 'package:ecomandroid/screens/category/categories_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -47,8 +46,6 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   ];
   @override
   Widget build(BuildContext context) {
-    Utils utils = Utils(context: context);
-    Color color = utils.color;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(10.0),

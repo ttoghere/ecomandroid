@@ -59,7 +59,7 @@ class EmptyScreen extends StatelessWidget {
                       context: context, routeName: FeedsScreen.routeName);
                 },
                 child: TextWidget(
-                  text: "Browse Products",
+                  text: buttonText,
                   color: Colors.white,
                   textSize: 20,
                 ),

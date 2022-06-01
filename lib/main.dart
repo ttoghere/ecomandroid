@@ -6,7 +6,6 @@ import 'package:ecomandroid/providers/wishlist_provider.dart';
 import 'package:ecomandroid/screens/auth/forget_pass.dart';
 import 'package:ecomandroid/screens/auth/login.dart';
 import 'package:ecomandroid/screens/auth/register.dart';
-import 'package:ecomandroid/screens/category/categories_screen.dart';
 import 'package:ecomandroid/screens/category/category_screen.dart';
 import 'package:ecomandroid/screens/viewed_recently/viewed_recently.dart';
 import 'package:ecomandroid/screens/wishlist/wishlist_screen.dart';

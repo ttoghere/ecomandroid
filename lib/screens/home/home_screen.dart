@@ -1,5 +1,4 @@
 import 'package:card_swiper/card_swiper.dart';
-import 'package:ecomandroid/consts/contss.dart';
 import 'package:ecomandroid/services/global_methods.dart';
 import 'package:ecomandroid/services/utils.dart';
 import 'package:ecomandroid/screens/feeds/feed_items.dart';
@@ -168,7 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 (index) {
                   var access = allProducts[index];
                   return ChangeNotifierProvider.value(
-                    value: allProducts[index],
+                    value: access,
                     child: FeedsItems(),
                   );
                 },

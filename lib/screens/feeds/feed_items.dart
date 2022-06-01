@@ -1,4 +1,5 @@
 import 'package:ecomandroid/providers/cart_provider.dart';
+import 'package:ecomandroid/providers/wishlist_provider.dart';
 import 'package:ecomandroid/shared/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,7 +11,6 @@ import 'package:ecomandroid/screens/detail/product_detail.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/products_model.dart';
-import '../../providers/product_provider.dart';
 
 class FeedsItems extends StatefulWidget {
   @override
@@ -37,6 +37,9 @@ class _FeedsItemsState extends State<FeedsItems> {
     final productProvider = Provider.of<ProductModel>(context);
     final cartProvider = Provider.of<CartProvider>(context);
     bool? _isInCart = cartProvider.cartItems.containsKey(productProvider.id);
+    final wishlistProvider = Provider.of<WishlistProvider>(context);
+    bool? _isWishlist =
+        wishlistProvider.wishListItems.containsKey(productProvider.id);
     return Padding(
       padding: EdgeInsets.all(10),
       child: Material(
@@ -71,7 +74,10 @@ class _FeedsItemsState extends State<FeedsItems> {
                       SizedBox(
                         width: 5,
                       ),
-                      HeartBTN(),
+                      HeartBTN(
+                        productId: productProvider.id,
+                        isInWishlist: _isWishlist,
+                      ),
                     ],
                   ),
                 ),

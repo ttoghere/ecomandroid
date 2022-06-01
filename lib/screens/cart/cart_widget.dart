@@ -10,7 +10,7 @@ import 'package:ecomandroid/providers/product_provider.dart';
 import 'package:ecomandroid/services/utils.dart';
 import 'package:ecomandroid/shared/heart_btn.dart';
 
-import '../../models/products_model.dart';
+import '../../providers/wishlist_provider.dart';
 
 class CartWidget extends StatefulWidget {
   final int q;
@@ -39,6 +39,7 @@ class _CartWidgetState extends State<CartWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final wishlistProvider = Provider.of<WishlistProvider>(context);
     final productProvider = Provider.of<ProductsProvider>(context);
     final cartModel = Provider.of<CartModel>(context);
     final cartProvider = Provider.of<CartProvider>(context);
@@ -48,6 +49,8 @@ class _CartWidgetState extends State<CartWidget> {
     double usedPrice = getCurrentProduct.isOnSale
         ? getCurrentProduct.salePrice
         : getCurrentProduct.price;
+    bool? _isWishlist =
+        wishlistProvider.wishListItems.containsKey(getCurrentProduct.id);
     return GestureDetector(
       onTap: () {
         Navigator.of(context).pushNamed(ProductDetails.routeName,
@@ -180,7 +183,10 @@ class _CartWidgetState extends State<CartWidget> {
                         SizedBox(
                           height: 5,
                         ),
-                        HeartBTN(),
+                    HeartBTN(
+                        productId: getCurrentProduct.id,
+                        isInWishlist: _isWishlist,
+                      ),
                         Text(
                           "\$${usedPrice}",
                           style:

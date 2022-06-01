@@ -1,6 +1,5 @@
 import 'package:ecomandroid/screens/detail/product_detail.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../services/global_methods.dart';
 import '../../services/utils.dart';
 import '../../shared/text_widget.dart';

@@ -1,9 +1,5 @@
 import 'package:ecomandroid/screens/category/category_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import 'package:ecomandroid/providers/dark_theme_provider.dart';
-
 class CategoriesWidget extends StatelessWidget {
   final String catText;
   final String imgPath;
@@ -17,7 +13,6 @@ class CategoriesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double _screenWidth = MediaQuery.of(context).size.width;
-    final themeState = Provider.of<DarkThemeProvider>(context);
     return InkWell(
       onTap: () {
         Navigator.of(context)
