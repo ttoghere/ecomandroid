@@ -1,7 +1,9 @@
+import 'package:ecomandroid/providers/viewed_provider.dart';
 import 'package:ecomandroid/screens/cart/empty_screen.dart';
 import 'package:ecomandroid/screens/viewed_recently/viewed_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:provider/provider.dart';
 import '../../services/global_methods.dart';
 import '../../shared/text_widget.dart';
 import '../onsale/on_sale_screen.dart';
@@ -19,8 +21,11 @@ class _ViewedRecentlyScreenState extends State<ViewedRecentlyScreen> {
   bool check = true;
   @override
   Widget build(BuildContext context) {
+    final viewedProvider = Provider.of<ViewedProvider>(context);
+    final viewedProviderList =
+        viewedProvider.viewedItems.values.toList().reversed.toList();
     bool _isEmpty = true;
-    if (_isEmpty == true) {
+    if (viewedProviderList.isEmpty) {
       return EmptyScreen(
         title: "Your history is empty",
         subtitle: "No products have been viewed",
@@ -60,9 +65,11 @@ class _ViewedRecentlyScreenState extends State<ViewedRecentlyScreen> {
         body: ListView.builder(
             itemCount: 10,
             itemBuilder: (ctx, index) {
-              return const Padding(
+              return Padding(
                 padding: EdgeInsets.symmetric(horizontal: 2, vertical: 6),
-                child: ViewedRecentlyWidget(),
+                child: ChangeNotifierProvider.value(
+                    value: viewedProviderList[index],
+                    child: ViewedRecentlyWidget()),
               );
             }),
       );

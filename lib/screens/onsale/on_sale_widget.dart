@@ -62,12 +62,14 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
                     Row(
                       children: [
                         GestureDetector(
-                          onTap: () {
-                            cartProvider.addProductsToCart(
-                              productId: productProvider.id,
-                              quantity: 1,
-                            );
-                          },
+                          onTap: _isInCart
+                              ? null
+                              : () {
+                                  cartProvider.addProductsToCart(
+                                    productId: productProvider.id,
+                                    quantity: 1,
+                                  );
+                                },
                           child: Icon(
                             IconlyLight.bag2,
                             color: _isInCart ? Colors.green : Colors.red[900],

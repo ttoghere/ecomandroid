@@ -1,7 +1,13 @@
+import 'package:ecomandroid/models/viewed_model.dart';
+import 'package:ecomandroid/providers/cart_provider.dart';
+import 'package:ecomandroid/providers/viewed_provider.dart';
 import 'package:ecomandroid/services/global_methods.dart';
 import 'package:ecomandroid/screens/detail/product_detail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:provider/provider.dart';
+import '../../providers/product_provider.dart';
 import '../../services/utils.dart';
 import '../../shared/text_widget.dart';
 
@@ -16,6 +22,15 @@ class _ViewedRecentlyWidgetState extends State<ViewedRecentlyWidget> {
   @override
   Widget build(BuildContext context) {
     Size size = Utils(context: context).screenSize;
+    final productProvider = Provider.of<ProductsProvider>(context);
+    final viewedModel = Provider.of<ViewedModel>(context);
+    final getCurrentProduct =
+        productProvider.findProdById(productId: viewedModel.productId);
+    double usedPrice = getCurrentProduct.isOnSale
+        ? getCurrentProduct.salePrice
+        : getCurrentProduct.price;
+    final cartProvider = Provider.of<CartProvider>(context);
+    bool? _isInCart = cartProvider.cartItems.containsKey(getCurrentProduct.id);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
@@ -28,7 +43,7 @@ class _ViewedRecentlyWidgetState extends State<ViewedRecentlyWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.network(
-              'https://i.ibb.co/F0s3FHQ/Apricots.png',
+              getCurrentProduct.imageUrl,
               fit: BoxFit.fill,
               height: size.width * 0.27,
               width: size.width * 0.25,
@@ -39,7 +54,7 @@ class _ViewedRecentlyWidgetState extends State<ViewedRecentlyWidget> {
             Column(
               children: [
                 TextWidget(
-                  text: 'Title',
+                  text: getCurrentProduct.title,
                   color: Colors.black,
                   textSize: 24,
                   isTitle: true,
@@ -48,7 +63,7 @@ class _ViewedRecentlyWidgetState extends State<ViewedRecentlyWidget> {
                   height: 12,
                 ),
                 TextWidget(
-                  text: '\$12.88',
+                  text: "\$${usedPrice.toStringAsFixed(2)}",
                   color: Colors.black,
                   textSize: 20,
                   isTitle: false,
@@ -63,13 +78,19 @@ class _ViewedRecentlyWidgetState extends State<ViewedRecentlyWidget> {
                 color: Colors.green,
                 child: InkWell(
                     borderRadius: BorderRadius.circular(12),
-                    onTap: () {},
-                    child: const Padding(
+                    onTap: _isInCart
+                        ? null
+                        : () {
+                            cartProvider.addProductsToCart(
+                              productId: getCurrentProduct.id,
+                              quantity: 1,
+                            );
+                          },
+                    child: Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Icon(
-                        CupertinoIcons.add,
-                        color: Colors.white,
-                        size: 20,
+                        _isInCart ? IconlyBold.plus : Icons.check,
+                        color: _isInCart ? Colors.green : Colors.red[900],
                       ),
                     )),
               ),

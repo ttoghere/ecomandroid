@@ -1,7 +1,9 @@
 import 'package:badges/badges.dart';
+import 'package:ecomandroid/providers/cart_provider.dart';
 import 'package:ecomandroid/shared/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:provider/provider.dart';
 import '../screens/cart/cart_screen.dart';
 import '../screens/category/categories_screen.dart';
 import '../screens/home/home_screen.dart';
@@ -62,19 +64,23 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
             label: "Category",
           ),
           BottomNavigationBarItem(
-            icon: Badge(
-              shape: BadgeShape.square,
-              badgeColor: Colors.red[200]!,
-              borderRadius: BorderRadius.circular(8),
-              position: BadgePosition.topEnd(
-                top: -7,
-                end: -7,
-              ),
-              badgeContent: FittedBox(
-                  child:
-                      TextWidget(text: "1", color: Colors.white, textSize: 10)),
-              child: Icon(
-                _selectedIndex == 2 ? IconlyBold.buy : IconlyLight.buy,
+            icon: Consumer<CartProvider>(
+              builder: (context, myCart, child) => Badge(
+                shape: BadgeShape.square,
+                badgeColor: Colors.red[200]!,
+                borderRadius: BorderRadius.circular(8),
+                position: BadgePosition.topEnd(
+                  top: -7,
+                  end: -7,
+                ),
+                badgeContent: FittedBox(
+                    child: TextWidget(
+                        text: myCart.cartItems.length.toString(),
+                        color: Colors.white,
+                        textSize: 10)),
+                child: Icon(
+                  _selectedIndex == 2 ? IconlyBold.buy : IconlyLight.buy,
+                ),
               ),
             ),
             label: "Cart",
