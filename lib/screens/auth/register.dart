@@ -1,5 +1,6 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:ecomandroid/consts/firebase_consts.dart';
+import 'package:ecomandroid/shared/bottom_bar.dart';
 import 'package:ecomandroid/shared/loading_manager.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
@@ -58,6 +59,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
           email: _emailTextController.text.toLowerCase().trim(),
           password: _passTextController.text,
         );
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => BottomBarWidget()));
         print("Successfully Signed");
       } catch (e) {
         GlobalMethods.errDialog(
@@ -87,7 +90,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             Swiper(
               duration: 800,
               autoplayDelay: 6000,
-      
+
               itemBuilder: (BuildContext context, int index) {
                 return Image.asset(
                   Constss.authImagesPaths[index],
@@ -96,7 +99,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               },
               autoplay: true,
               itemCount: Constss.authImagesPaths.length,
-      
+
               // control: const SwiperControl(),
             ),
             Container(
@@ -114,8 +117,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   InkWell(
                     borderRadius: BorderRadius.circular(12),
-                    onTap: () =>
-                        Navigator.canPop(context) ? Navigator.pop(context) : null,
+                    onTap: () => Navigator.canPop(context)
+                        ? Navigator.pop(context)
+                        : null,
                     child: Icon(
                       IconlyLight.arrowLeft2,
                       color: theme == true ? Colors.white : Colors.black,
@@ -181,8 +185,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         TextFormField(
                           focusNode: _emailFocusNode,
                           textInputAction: TextInputAction.next,
-                          onEditingComplete: () =>
-                              FocusScope.of(context).requestFocus(_passFocusNode),
+                          onEditingComplete: () => FocusScope.of(context)
+                              .requestFocus(_passFocusNode),
                           keyboardType: TextInputType.emailAddress,
                           controller: _emailTextController,
                           validator: (value) {
@@ -256,7 +260,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         const SizedBox(
                           height: 20,
                         ),
-      
+
                         TextFormField(
                           focusNode: _addressFocusNode,
                           textInputAction: TextInputAction.done,
@@ -325,7 +329,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   RichText(
                     text: TextSpan(
                         text: 'Already a user?',
-                        style: const TextStyle(color: Colors.white, fontSize: 18),
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 18),
                         children: <TextSpan>[
                           TextSpan(
                               text: ' Sign in',

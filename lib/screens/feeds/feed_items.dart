@@ -1,6 +1,7 @@
 import 'package:ecomandroid/providers/cart_provider.dart';
 import 'package:ecomandroid/providers/wishlist_provider.dart';
 import 'package:ecomandroid/shared/text_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -10,7 +11,9 @@ import 'package:ecomandroid/shared/price_widget.dart';
 import 'package:ecomandroid/screens/detail/product_detail.dart';
 import 'package:provider/provider.dart';
 
+import '../../consts/firebase_consts.dart';
 import '../../models/products_model.dart';
+import '../../services/global_methods.dart';
 
 class FeedsItems extends StatefulWidget {
   @override
@@ -147,6 +150,15 @@ class _FeedsItemsState extends State<FeedsItems> {
                 onPressed: _isInCart
                     ? null
                     : () {
+                        final User? user = firebaseAuth.currentUser;
+                        if (user == null) {
+                          GlobalMethods.errDialog(
+                            title: "No user found please login first",
+                            subtitle: "No log here",
+                            context: context,
+                          );
+                          return;
+                        }
                         cartProvider.addProductsToCart(
                           productId: productProvider.id,
                           quantity: int.parse(_quantityTextController.text),

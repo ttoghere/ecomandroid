@@ -1,7 +1,10 @@
+import 'package:ecomandroid/consts/firebase_consts.dart';
 import 'package:ecomandroid/providers/cart_provider.dart';
+import 'package:ecomandroid/services/global_methods.dart';
 import 'package:ecomandroid/services/utils.dart';
 import 'package:ecomandroid/shared/price_widget.dart';
 import 'package:ecomandroid/shared/text_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
@@ -65,6 +68,15 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
                           onTap: _isInCart
                               ? null
                               : () {
+                                  final User? user = firebaseAuth.currentUser;
+                                  if (user == null) {
+                                    GlobalMethods.errDialog(
+                                      title: "No user found please login",
+                                      subtitle: "No log here",
+                                      context: context,
+                                    );
+                                    return;
+                                  }
                                   cartProvider.addProductsToCart(
                                     productId: productProvider.id,
                                     quantity: 1,

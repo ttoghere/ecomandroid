@@ -3,10 +3,12 @@ import 'package:ecomandroid/providers/cart_provider.dart';
 import 'package:ecomandroid/providers/viewed_provider.dart';
 import 'package:ecomandroid/services/global_methods.dart';
 import 'package:ecomandroid/screens/detail/product_detail.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
+import '../../consts/firebase_consts.dart';
 import '../../providers/product_provider.dart';
 import '../../services/utils.dart';
 import '../../shared/text_widget.dart';
@@ -35,8 +37,8 @@ class _ViewedRecentlyWidgetState extends State<ViewedRecentlyWidget> {
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         onTap: () {
-          GlobalMethods.navigateTo(
-              context: context, routeName: ProductDetails.routeName);
+          // GlobalMethods.navigateTo(
+          //     context: context, routeName: ProductDetails.routeName);
         },
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -81,6 +83,15 @@ class _ViewedRecentlyWidgetState extends State<ViewedRecentlyWidget> {
                     onTap: _isInCart
                         ? null
                         : () {
+                            final User? user = firebaseAuth.currentUser;
+                            if (user == null) {
+                              GlobalMethods.errDialog(
+                                title: "No user found please login first",
+                                subtitle: "No log here",
+                                context: context,
+                              );
+                              return;
+                            }
                             cartProvider.addProductsToCart(
                               productId: getCurrentProduct.id,
                               quantity: 1,

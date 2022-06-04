@@ -1,3 +1,6 @@
+import 'package:ecomandroid/consts/firebase_consts.dart';
+import 'package:ecomandroid/services/global_methods.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +21,15 @@ class HeartBTN extends StatelessWidget {
     final wishlistProvider = Provider.of<WishlistProvider>(context);
     return GestureDetector(
       onTap: () {
+        final User? user = firebaseAuth.currentUser;
+        if (user == null) {
+          GlobalMethods.errDialog(
+            title: "No user found please login first",
+            subtitle: "No log here",
+            context: context,
+          );
+          return;
+        }
         wishlistProvider.addRemoveProductToWishlist(
           productId: productId,
         );

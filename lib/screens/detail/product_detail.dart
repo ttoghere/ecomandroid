@@ -1,12 +1,15 @@
 import 'package:ecomandroid/providers/cart_provider.dart';
 import 'package:ecomandroid/providers/product_provider.dart';
 import 'package:ecomandroid/providers/viewed_provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
+import '../../consts/firebase_consts.dart';
 import '../../providers/wishlist_provider.dart';
+import '../../services/global_methods.dart';
 import '../../services/utils.dart';
 
 import '../../shared/heart_btn.dart';
@@ -286,6 +289,17 @@ class _ProductDetailsState extends State<ProductDetails> {
                               onTap: _isInCart
                                   ? null
                                   : () {
+                                      final User? user =
+                                          firebaseAuth.currentUser;
+                                      if (user == null) {
+                                        GlobalMethods.errDialog(
+                                          title:
+                                              "No user found please login first",
+                                          subtitle: "No log here",
+                                          context: context,
+                                        );
+                                        return;
+                                      }
                                       cartProvider.addProductsToCart(
                                         productId: getCurrentProduct.id,
                                         quantity: int.parse(

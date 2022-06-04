@@ -75,7 +75,7 @@ class _MyAppState extends State<MyApp> {
                     ),
                   );
                 } else {
-                  return LoginScreen();
+                  return BottomBarWidget();
                 }
               },
             ),
