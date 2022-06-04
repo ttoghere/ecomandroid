@@ -1,3 +1,5 @@
+import 'package:ecomandroid/consts/firebase_consts.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,11 +21,11 @@ import 'screens/viewed_recently/viewed_recently.dart';
 import 'screens/wishlist/wishlist_screen.dart';
 import 'shared/bottom_bar.dart';
 
-void main()async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-  options: DefaultFirebaseOptions.currentPlatform,
-);
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MyApp());
 }
 
@@ -63,7 +65,20 @@ class _MyAppState extends State<MyApp> {
             title: 'Material App',
             theme: Styles.themeData(
                 isDarkTheme: value.darkTheme, context: context),
-            home: BottomBarWidget(),
+            home: StreamBuilder(
+              stream: firebaseAuth.authStateChanges(),
+              builder: (context, AsyncSnapshot<User?> user) {
+                if (user.connectionState == ConnectionState.waiting) {
+                  return Scaffold(
+                    body: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                } else {
+                  return LoginScreen();
+                }
+              },
+            ),
             routes: {
               FeedsScreen.routeName: (context) => FeedsScreen(),
               OnSaleScreen.routeName: (context) => OnSaleScreen(),

@@ -1,4 +1,6 @@
 import 'package:card_swiper/card_swiper.dart';
+import 'package:ecomandroid/consts/firebase_consts.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
@@ -29,6 +31,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _emailFocusNode = FocusNode();
   final _addressFocusNode = FocusNode();
   bool _obscureText = true;
+  bool _isLoading = false;
   @override
   void dispose() {
     _fullNameController.dispose();
@@ -44,8 +47,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
   void _submitFormOnRegister() async {
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
+    setState(() {
+      _isLoading = true;
+    });
     if (isValid) {
       _formKey.currentState!.save();
+      try {
+        await firebaseAuth.createUserWithEmailAndPassword(
+          email: _emailTextController.text.toLowerCase().trim(),
+          password: _passTextController.text,
+        );
+        print("Successfully Signed");
+      } catch (e) {
+        GlobalMethods.errDialog(
+          title: "There is an error: $e",
+          subtitle: "An error has occured",
+          context: context,
+        );
+        setState(() {
+          _isLoading = false;
+        });
+      } finally {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     }
   }
 
@@ -282,12 +308,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                 ),
-                AuthButton(
-                  buttonText: 'Sign up',
-                  fct: () {
-                    _submitFormOnRegister();
-                  },
-                ),
+                _isLoading
+                    ? CircularProgressIndicator()
+                    : AuthButton(
+                        buttonText: 'Sign up',
+                        fct: () {
+                          _submitFormOnRegister();
+                        },
+                      ),
                 const SizedBox(
                   height: 10,
                 ),
