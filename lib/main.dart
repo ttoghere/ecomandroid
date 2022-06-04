@@ -1,24 +1,29 @@
-import 'package:ecomandroid/consts/theme_data.dart';
-import 'package:ecomandroid/providers/cart_provider.dart';
-import 'package:ecomandroid/providers/dark_theme_provider.dart';
-import 'package:ecomandroid/providers/product_provider.dart';
-import 'package:ecomandroid/providers/viewed_provider.dart';
-import 'package:ecomandroid/providers/wishlist_provider.dart';
-import 'package:ecomandroid/screens/auth/forget_pass.dart';
-import 'package:ecomandroid/screens/auth/login.dart';
-import 'package:ecomandroid/screens/auth/register.dart';
-import 'package:ecomandroid/screens/category/category_screen.dart';
-import 'package:ecomandroid/screens/viewed_recently/viewed_recently.dart';
-import 'package:ecomandroid/screens/wishlist/wishlist_screen.dart';
-import 'package:ecomandroid/shared/bottom_bar.dart';
-import 'package:ecomandroid/screens/detail/product_detail.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'consts/theme_data.dart';
+import 'firebase_options.dart';
+import 'providers/cart_provider.dart';
+import 'providers/dark_theme_provider.dart';
+import 'providers/product_provider.dart';
+import 'providers/viewed_provider.dart';
+import 'providers/wishlist_provider.dart';
+import 'screens/auth/forget_pass.dart';
+import 'screens/auth/login.dart';
+import 'screens/auth/register.dart';
+import 'screens/category/category_screen.dart';
+import 'screens/detail/product_detail.dart';
 import 'screens/feeds/feeds_screen.dart';
 import 'screens/onsale/on_sale_screen.dart';
+import 'screens/viewed_recently/viewed_recently.dart';
+import 'screens/wishlist/wishlist_screen.dart';
+import 'shared/bottom_bar.dart';
 
-void main() {
+void main()async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+  options: DefaultFirebaseOptions.currentPlatform,
+);
   runApp(MyApp());
 }
 

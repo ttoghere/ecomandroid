@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1098133953410",
+    "project_id": "payshopapp-6e04e",
+    "storage_bucket": "payshopapp-6e04e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1098133953410:android:78189f0fbeb59ccb6ccd9b",
+        "android_client_info": {
+          "package_name": "com.example.ecomandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1098133953410-nfl8rntumo7ca76h6runki6nbis82ku5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJxrqrKImHJKBr2CxH0b40_OTcsGBH7-I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1098133953410-nfl8rntumo7ca76h6runki6nbis82ku5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

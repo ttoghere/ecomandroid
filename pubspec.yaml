@@ -29,7 +29,11 @@ environment:
 dependencies:
   badges: ^2.0.2
   card_swiper: ^2.0.3
+  cloud_firestore: ^3.1.17
   cupertino_icons: ^1.0.2
+  firebase_auth: ^3.3.19
+  firebase_core: ^1.17.1
+  firebase_storage: ^10.2.17
   flutter:
     sdk: flutter
   flutter_iconly: ^1.0.2
