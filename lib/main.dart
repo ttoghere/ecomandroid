@@ -2,6 +2,7 @@ import 'package:ecomandroid/consts/theme_data.dart';
 import 'package:ecomandroid/providers/cart_provider.dart';
 import 'package:ecomandroid/providers/dark_theme_provider.dart';
 import 'package:ecomandroid/providers/product_provider.dart';
+import 'package:ecomandroid/providers/viewed_provider.dart';
 import 'package:ecomandroid/providers/wishlist_provider.dart';
 import 'package:ecomandroid/screens/auth/forget_pass.dart';
 import 'package:ecomandroid/screens/auth/login.dart';
@@ -48,6 +49,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => darkThemeProvider),
         ChangeNotifierProvider(create: (context) => CartProvider()),
         ChangeNotifierProvider(create: (context) => WishlistProvider()),
+        ChangeNotifierProvider(create: (context) => ViewedProvider()),
       ],
       child: Consumer<DarkThemeProvider>(
         builder: (context, value, child) {
